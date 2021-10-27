@@ -54,23 +54,23 @@ public class Main {
         BigInteger previousElement = numbers.pop();
         switch (op) {
             case "*":
-                numbers.push(previousElement.multiply(lastElement));
+                System.out.println(previousElement + "*" + lastElement + "=" + numbers.push(previousElement.multiply(lastElement)));
                 break;
             case "/":
                 try {
-                    numbers.push(previousElement.divide(lastElement));
+                    System.out.println(previousElement + "/" + lastElement + "=" +numbers.push(previousElement.divide(lastElement)));
                 } catch (ArithmeticException ex) {
-                    System.err.println("Your equation fail, you can't divide by zero!");
+                    System.err.println("ERROR: Your equation fail, you can't divide by zero!");
                 }
                 break;
             case "+":
-                numbers.push(previousElement.add(lastElement));
+                System.out.println(previousElement + "+" + lastElement + "=" +numbers.push(previousElement.add(lastElement)));
                 break;
             case "-":
-                numbers.push(previousElement.subtract(lastElement));
+                System.out.println(previousElement + "-" + lastElement + "=" +numbers.push(previousElement.subtract(lastElement)));
                 break;
             default:
-                System.out.println("You enter wrong equation");
+                System.err.println("ERROR: You enter wrong options");
         }
     }
 }
