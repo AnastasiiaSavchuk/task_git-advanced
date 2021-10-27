@@ -59,9 +59,11 @@ public class Main {
                 break;
             case "/":
                 try {
-                    numbers.push(numbers.pop() / numbers.pop());
+                    int first = numbers.pop();
+                    int second = numbers.pop();
+                    numbers.push(second / first);
                 } catch (ArithmeticException ex) {
-                    System.err.println("Your equation fail, you " + ex.getMessage());
+                    System.err.println("Your equation fail, you can't divide by zero!");
                 }
                 break;
             case "+":
