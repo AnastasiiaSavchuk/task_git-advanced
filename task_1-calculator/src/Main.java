@@ -1,17 +1,14 @@
+import java.math.BigInteger;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.Stack;
 
 public class Main {
     private static final Stack<String> operations = new Stack<>();
-    private static final Stack<Integer> numbers = new Stack<>();
-
+    private static final Stack<BigInteger> numbers = new Stack<>();
 
     public static void main(String[] args) {
-        System.out.println("Input data can be only integer!");
-        System.out.println("For example : 2+2*(5-7)");
-        System.out.println("Enter your equation to obtain solutions : ");
-
+        System.out.println("Enter your equation, for example 2+2*(5-7) :");
         try (Scanner sc = new Scanner(System.in)) {
             while (sc.hasNextLine()) {
                 String equation = sc.nextLine().replaceAll("\\s", "");
@@ -19,7 +16,7 @@ public class Main {
                 System.out.println(equation + "=" + numbers.pop());
             }
         } catch (NoSuchElementException ex) {
-            System.err.println("ERROR: Please enter your equation!");
+            System.err.println("ERROR: You didn't enter your equation!");
         }
     }
 
@@ -41,7 +38,7 @@ public class Main {
                         Character.isDigit(equation.charAt(index + 1))) {
                     value.append(equation.charAt(++index));
                 }
-                numbers.push(Integer.parseInt(value.toString()));
+                numbers.push(BigInteger.valueOf(Long.parseLong(value.toString())));
             }
             index++;
         }
@@ -53,24 +50,24 @@ public class Main {
 
     private static void doOperation() {
         String op = operations.pop();
+        BigInteger lastElement = numbers.pop();
+        BigInteger previousElement = numbers.pop();
         switch (op) {
             case "*":
-                numbers.push(numbers.pop() * numbers.pop());
+                numbers.push(previousElement.multiply(lastElement));
                 break;
             case "/":
                 try {
-                    int first = numbers.pop();
-                    int second = numbers.pop();
-                    numbers.push(second / first);
+                    numbers.push(previousElement.divide(lastElement));
                 } catch (ArithmeticException ex) {
                     System.err.println("Your equation fail, you can't divide by zero!");
                 }
                 break;
             case "+":
-                numbers.push(numbers.pop() + numbers.pop());
+                numbers.push(previousElement.add(lastElement));
                 break;
             case "-":
-                numbers.push(numbers.pop() - numbers.pop());
+                numbers.push(previousElement.subtract(lastElement));
                 break;
             default:
                 System.out.println("You enter wrong equation");
