@@ -10,11 +10,12 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Enter your equation, for example 2+2*(5-7) :");
         try (Scanner sc = new Scanner(System.in)) {
-            while (sc.hasNextLine()) {
+            do {
                 String equation = sc.nextLine().replaceAll("\\s", "");
                 calculate(equation);
                 System.out.println(equation + "=" + numbers.pop());
-            }
+                System.out.println("Continue -> enter new equation, exit -> enter 0");
+            } while (sc.nextInt() != 0);
         } catch (NoSuchElementException ex) {
             System.err.println("ERROR: You didn't enter your equation!");
         }
