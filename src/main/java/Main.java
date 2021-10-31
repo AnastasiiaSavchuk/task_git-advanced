@@ -1,6 +1,4 @@
 import java.math.BigInteger;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 import java.util.Stack;
 
 public class Main {
@@ -8,16 +6,23 @@ public class Main {
     private static final Stack<BigInteger> numbers = new Stack<>();
 
     public static void main(String[] args) {
-        System.out.println("Enter your equation, for example 2+2*(5-7) :");
-        try (Scanner sc = new Scanner(System.in)) {
-            while (sc.hasNextLine()) {
-                String equation = sc.nextLine().replaceAll("\\s", "");
-                calculate(equation);
-                System.out.println(equation + "=" + numbers.pop());
-            }
-        } catch (NoSuchElementException ex) {
-            System.err.println("ERROR: You didn't enter your equation!");
+//        System.out.println("Enter your equation, for example 2+2*(5-7) :");
+//        try (Scanner sc = new Scanner(System.in)) {
+//            while (sc.hasNextLine()){
+//                String equation = sc.nextLine().replaceAll("\\s", "");
+//                calculate(equation);
+//                System.out.println(equation + "=" + numbers.pop());
+//                System.out.println("Enter your equation :");
+//            }
+//        } catch (NoSuchElementException ex) {
+//            System.err.println("ERROR: You didn't enter your equation!");
+//        }
+        String equation = "";
+        for (String str : args) {
+            equation += str;
         }
+        calculate(equation);
+        System.out.println(equation + "=" + numbers.pop());
     }
 
     private static void calculate(String equation) {
